@@ -1,0 +1,28 @@
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Register">
+</form>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $("#id_work_category").change(function() {
+      var selectedCategory = $(this).val();
+      $.ajax({
+        url: "/get_subcategories/",  // URL to fetch subcategories based on selected category
+        data: { category: selectedCategory },
+        dataType: "json",
+        success: function(data) {
+          var subcategoriesSelect = $("#id_work_subcategory");
+          subcategoriesSelect.empty();
+          $.each(data.subcategories, function(key, value) {
+            subcategoriesSelect.append($('<option>').text(value).attr('value', key));
+          });
+        }
+      });
+    });
+  });
+</script>
+

@@ -1,0 +1,40 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+<div style="max-width: 400px; margin: 50px auto 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); background-color: #fff; text-align: center;">
+
+    <h1> SIGN UP</h1>
+
+    <form method="POST" style="margin-top: 20px; display: inline-block; text-align: left;">
+
+        {% csrf_token %}
+
+        <div style="text-align: left;">
+            <label for="id_username" style="font-weight: bold;">Username:</label><br>
+            {{ form.username }}
+            <br>
+
+            <label for="id_email" style="font-weight: bold;">Email:</label><br>
+            {{ form.email }}
+            <br>
+
+            <label for="id_password" style="font-weight: bold;">Password:</label><br>
+            {{ form.password }}
+            <br>
+
+            <label for="id_repassword" style="font-weight: bold;">Confirm Password:</label><br>
+            {{ form.repassword }}
+            <br>
+        </div>
+
+        <div style="text-align: center;">
+            <input type="submit" value="Submit" style="background-color: #007bff; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 20px;">
+        </div>
+
+    </form>
+   <p class="signup-link" style="font-size: 14px; margin-top: 10px;">Already have an account? <a href="{% url 'login' %}" style="text-decoration: none; color: #007bff;">Sign in</a></p>
+
+
+</div>
+{% endblock %}

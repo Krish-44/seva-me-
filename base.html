@@ -1,0 +1,109 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block title %} <title>Bootstrap demo</title>{% endblock %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid px-5">
+            <a class="navbar-brand" href="#">
+                <h1 style="font-family: 'Pacifico', cursive; font-size: 32px; display: inline-block;">SarvaKriyaNivesh</h1>
+            </a>
+            <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'services' %}">Home</a>
+                    </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <img src="{% static 'images/location.png' %}" alt="Icon X" width="20" height="20" class="d-inline-block align-text-top">
+                    <span id="user-city">Location</span>
+                </a>
+            </li>
+            <form class="d-flex justify-content-center mx-2" action="{% url 'service_search' %}" method="GET">
+                <input class="form-control me-2" type="text" name="search_query"
+                       placeholder="Discover Top-Notch Services Near You..." aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+
+            <!-- ... (previous HTML code) ... -->
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="signInDropdown" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                    <img
+                        src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/profile-815786.svg"
+                        alt="Sign in" class="-dOa_b L_FVxe" width="24" height="24">
+                    {% if user.is_authenticated %}
+                        <span class="_1sLnDu">Logout</span>
+                    {% else %}
+                        <span class="_1sLnDu">Sign in</span>
+                    {% endif %}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="signInDropdown">
+                    {% if user.is_authenticated %}
+                        <li>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a class="dropdown-item" href="{% url 'register' %}">New Customer? Sign Up</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item text-dark" href="{% url 'login' %}">My Profile</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </li>
+
+            <!-- ... (remaining HTML code) ... -->
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'about_us' %}">About Us</a>
+            </li>
+        </div>
+    </nav>
+    {% block content %}{% endblock %}
+    <script>
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            // Replace 'YOUR_API_KEY' with your actual OpenCage API key
+            var apiKey = '3c96fd7b77bf457c906119ca2b525802';
+            var apiUrl = `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKey}`;
+
+            // Make a request to the OpenCage Geocoding API
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.results.length > 0) {
+                        // Extract city from the OpenCage API response
+                        var formattedAddress = data.results[0].formatted;
+                        var city = formattedAddress.split(', ')[1]; // Assuming city is the second part of the address
+
+                        // Update the city name in the navbar
+                        document.getElementById("user-city").textContent = city;
+                    } else {
+                        console.log("City not found in the API response.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching data from the geocoding API:", error);
+                });
+        });
+    } else {
+        console.log("Geolocation is not supported by this browser.");
+    }
+</script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>

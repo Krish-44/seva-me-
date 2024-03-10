@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="container" >
+    <div class="row" >
+      <div class="col-6  justify-content-center" style="background-color: #ffe5e5; position: sticky; left: 0; top: 0; height: 100vh;">
+        <div class="w-100 text-center" style="margin-top: 250px;">
+            <h1>For Customers:</h1>
+          <h2>Get all your services in one place with our easy-to-use platform</h2>
+          <button type="button" class="btn btn-secondary" style="margin-bottom: 200px; margin-top: 30px;"><a href="{% url 'register' %}" style="text-decoration:none; color: White;">Sign Up</a></button>
+        </div>
+      </div>
+      <div class="col-6  justify-content-center" style="background-color: #e4e4d0; position: sticky; right: 0; top: 0; height: 100vh;">
+        <div class="w-100 text-center" style="margin-top: 250px;">
+            <h1>For Experts:</h1>
+          <h2>Provide your customers with the best possible service with our tools and resources.</h2>
+          <button type="button" class="btn btn-secondary" style="margin-bottom: 200px;" ><a href="{% url 'expert_register' %}" style="text-decoration:none; color: White;">Sign Up</a></button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

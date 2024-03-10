@@ -1,0 +1,14 @@
+<div class="col-md-2">
+    <div class="card shadow-sm">
+        <img src="{{ image_url }}" alt="{{ alt_text }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ title }}</h5>
+            <p class="card-text">{{ price }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'book_service' service.id %}">Book Now</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

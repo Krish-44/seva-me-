@@ -1,0 +1,29 @@
+{% extends "core/base.html" %}
+{% block content %}
+<div class="container my-3">
+    <h1 class="my-4 text-center">Search Results for "{{ search_query }}"</h1>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for service in services %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <!-- Display property details here -->
+                    <img src="https://source.unsplash.com/1600x900/?all Home services" alt="img home">
+                    <div class="card-body">
+                        <h2 class="card-title">{{ service.title }} #{{service.id}}</h2>
+                        <p class="card-text">{{ service.sub_title }}</p>
+                        <p>Price: &#8377;{{ service.price }}</p>
+                        <div class="btn-group"> For more details &nbsp; &nbsp;
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'book_service' service.id %}">Book Now</a></button>
+
+                </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col">
+                <p style="text-align: center;">No properties match your search criteria.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+<div style="max-width: 400px; margin: 20px auto 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); background-color: #fff; text-align: center;">
+    <h1 style="font-size: 24px; margin: 20px 0;">Login</h1>
+
+    <h4 style="font-size: 16px; color: #ff0000;">{{ message }}</h4>
+
+    <form method="post" action="{% url 'login' %}" style="margin-top: 20px; display: inline-block; text-align: left;">
+
+        {% csrf_token %}
+
+        <label for="username" style="font-weight: bold;">Username:</label><br>
+        <input type="text" id="username" name="username" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px;"><br><br>
+
+        <label for="password" style="font-weight: bold;">Password:</label><br>
+        <input type="password" id="password" name="password" required style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px;"><br><br>
+
+        <input type="submit" value="Submit" style="background-color: #007bff; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px;"><br><br>
+    </form>
+
+    <p class="signup-link" style="font-size: 14px; margin-top: 10px;">Don't have an account? <a href="{% url 'register' %}" style="text-decoration: none; color: #007bff;">Sign up</a></p>
+</div>
+{% endblock %}

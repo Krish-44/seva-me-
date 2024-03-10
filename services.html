@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+{% for title, sub_services in services_by_title.items %}
+<div class="container my-3">
+    <h3 class="my-4" id="Features">{{ title }}</h3>
+    <div class="row">
+        {% for service in sub_services %}
+            {% include 'servicess/base_service_card.html' with image_url=service.image_url alt_text=service.alt_text title=service.sub_title price=service.price %}
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
